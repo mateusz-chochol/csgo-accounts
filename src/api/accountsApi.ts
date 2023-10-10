@@ -2,6 +2,7 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
   updateDoc,
@@ -10,6 +11,8 @@ import {
 import { Account } from "../types";
 import { accountsRef } from "./firestoreRefs";
 import { db } from "../firebase";
+import { getBanUntilAsDate } from "../utils";
+import { MS_PER_SECOND } from "../consts";
 
 export const fetchUserAccounts = async (userId: string): Promise<Account[]> => {
   const accountsQuery = query(accountsRef, where("ownerId", "==", userId));
@@ -23,6 +26,9 @@ export const fetchUserAccounts = async (userId: string): Promise<Account[]> => {
       ownerId: data.ownerId,
       displayName: data.displayName,
       banUntil: data.banUntil || null,
+      banCounter: data.banCounter || 0,
+      totalBanTime: data.totalBanTime || 0,
+      lastBanTime: data.lastBanTime || 0,
     };
   });
 
@@ -33,11 +39,38 @@ export const banAccount = async (
   accountId: string,
   banUntil: string
 ): Promise<void> => {
-  return await updateDoc(doc(db, "accounts", accountId), { banUntil });
+  const accountRef = doc(db, "accounts", accountId);
+  const accountSnapshot = await getDoc(accountRef);
+  const accountData = accountSnapshot.data();
+
+  const banUntilDate = getBanUntilAsDate(banUntil);
+  const banUntilTimestamp = banUntilDate.getTime() / MS_PER_SECOND;
+  const currentDateTimestamp = Date.now() / MS_PER_SECOND;
+
+  const banTimeTimestamp = Math.ceil(banUntilTimestamp - currentDateTimestamp);
+
+  return await updateDoc(accountRef, {
+    banUntil,
+    banCounter: accountData?.banCounter + 1 || 1,
+    totalBanTime:
+      accountData?.totalBanTime + banTimeTimestamp || banTimeTimestamp,
+    lastBanTime: banTimeTimestamp,
+  });
 };
 
 export const unbanAccount = async (accountId: string): Promise<void> => {
-  return await updateDoc(doc(db, "accounts", accountId), { banUntil: null });
+  const accountRef = doc(db, "accounts", accountId);
+  const accountSnapshot = await getDoc(accountRef);
+  const accountData = accountSnapshot.data();
+
+  const lastBanTime = accountData?.lastBanTime || 0;
+
+  return await updateDoc(accountRef, {
+    banUntil: null,
+    banCounter: accountData?.banCounter - 1 || 0,
+    totalBanTime: accountData?.totalBanTime - lastBanTime || 0,
+    lastBanTime: 0,
+  });
 };
 
 export const changeAccountName = async (
@@ -60,5 +93,8 @@ export const addNewAccount = async (
   await addDoc(accountsRef, {
     displayName: accountName,
     ownerId,
+    banCounter: 0,
+    totalBanTime: 0,
+    lastBanTime: 0,
   });
 };

@@ -53,6 +53,9 @@ export const AccountStack = ({
               id={account.id}
               displayName={account.displayName}
               banUntil={account.banUntil}
+              banCounter={account.banCounter}
+              totalBanTime={account.totalBanTime}
+              lastBanTime={account.lastBanTime}
               ownerId={ownerId}
             />
           ))}

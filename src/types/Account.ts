@@ -3,4 +3,7 @@ export interface Account {
   ownerId: string;
   displayName: string;
   banUntil: string | null;
+  banCounter: number;
+  totalBanTime: number;
+  lastBanTime: number;
 }
