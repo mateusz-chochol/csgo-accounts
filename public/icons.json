@@ -1,22 +1,5 @@
 {
-  "short_name": "Konta CSGO",
-  "name": "Konta CSGO",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "200x159",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
     {
       "src": "windows11/SmallTile.scale-100.png",
       "sizes": "71x71"
@@ -465,11 +448,5 @@
       "src": "ios/1024.png",
       "sizes": "1024x1024"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "orientation": "portrait",
-  "description": "Apka do trackowania zbanowanych kont do CSa za trolling",
-  "theme_color": "#000000",
-  "background_color": "#000000"
+  ]
 }
