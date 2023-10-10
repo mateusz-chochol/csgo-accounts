@@ -14,11 +14,11 @@ export const useOwnerAccounts = (ownerId: string) => {
         }
 
         if (a.banUntil) {
-          return -1;
+          return 1;
         }
 
         if (b.banUntil) {
-          return 1;
+          return -1;
         }
 
         return a.displayName.localeCompare(b.displayName);
