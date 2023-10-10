@@ -30,14 +30,14 @@ export const Content = () => {
 
   const addSnackbar = useCallback(
     (message: string, type: AlertColor = "success") => {
-      setSnackbarType(type);
-      setSnackbarMessage(message);
-      setIsSuccessSnackbarOpen(true);
-
       if (closeSnackbarTimeoutId) {
         clearTimeout(closeSnackbarTimeoutId);
         setCloseSnackbarTimeoutId(null);
       }
+
+      setSnackbarType(type);
+      setSnackbarMessage(message);
+      setIsSuccessSnackbarOpen(true);
     },
     [closeSnackbarTimeoutId]
   );
