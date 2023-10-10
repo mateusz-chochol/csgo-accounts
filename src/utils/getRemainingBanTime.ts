@@ -4,6 +4,7 @@ import {
   MS_PER_MINUTE,
   MS_PER_SECOND,
 } from "../consts";
+import { getBanUntilAsDate } from "./getBanUntilAsDate";
 import { getTimePartDisplayString } from "./getTimePartDisplayString";
 
 export const getRemainingBanTime = (banUntil: string | null) => {
@@ -11,12 +12,7 @@ export const getRemainingBanTime = (banUntil: string | null) => {
     return null;
   }
 
-  const [date, time] = banUntil.split(",");
-  const [day, month, year] = date.split(".");
-
-  const banUntilConvertedToCorrectFormat = `${month}/${day}/${year}, ${time}`;
-
-  const banDate = new Date(banUntilConvertedToCorrectFormat);
+  const banDate = getBanUntilAsDate(banUntil);
   const currentDate = new Date();
 
   const banDateUTC = Date.UTC(
