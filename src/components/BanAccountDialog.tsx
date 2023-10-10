@@ -15,9 +15,9 @@ import {
 } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
+import { useMutation, useQueryClient } from "react-query";
 import { daysOptions, defaultTime } from "../consts";
 import { getBanUntilDateString, mapDayOptionToNumberOfDays } from "../utils";
-import { useMutation, useQueryClient } from "react-query";
 import { banAccount } from "../api/accountsApi";
 
 interface BanAccountDialogProps {
