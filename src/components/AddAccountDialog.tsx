@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 import { addNewAccount } from "../api/accountsApi";
+import { SnackbarContext } from "../contexts";
 
 interface AddAccountDialogProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export const AddAccountDialog = ({
   accountOwnerId,
 }: AddAccountDialogProps) => {
   const [newAccountName, setNewAccountName] = useState("");
+  const { addSnackbar } = useContext(SnackbarContext);
 
   const queryClient = useQueryClient();
 
@@ -32,10 +34,14 @@ export const AddAccountDialog = ({
     mutationFn: (newAccount: { name: string; ownerId: string }) => {
       return addNewAccount(newAccount.name, newAccount.ownerId);
     },
-    onSuccess: () => {
+    onSuccess: (_, { name }) => {
       queryClient.invalidateQueries({
         queryKey: ["accounts", accountOwnerId],
       });
+      addSnackbar(`Konto "${name}" zostało dodane.`);
+    },
+    onError: () => {
+      addSnackbar("Coś poszło nie tak.", "error");
     },
   });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 import { changeAccountName } from "../api/accountsApi";
+import { SnackbarContext } from "../contexts";
 
 interface ChangeAccountNameDialogProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export const ChangeAccountNameDialog = ({
   accountOwnerId,
 }: ChangeAccountNameDialogProps) => {
   const [newAccountName, setNewAccountName] = useState("");
+  const { addSnackbar } = useContext(SnackbarContext);
 
   const queryClient = useQueryClient();
 
@@ -36,10 +38,17 @@ export const ChangeAccountNameDialog = ({
     mutationFn: (newName: { accountId: string; newAccountName: string }) => {
       return changeAccountName(newName.accountId, newName.newAccountName);
     },
-    onSuccess: () => {
+    onSuccess: (_, { newAccountName }) => {
       queryClient.invalidateQueries({
         queryKey: ["accounts", accountOwnerId],
       });
+      addSnackbar(
+        `Nazwa konta "${accountDisplayName}" został zmieniona na "${newAccountName}".`,
+        "info"
+      );
+    },
+    onError: () => {
+      addSnackbar("Coś poszło nie tak.", "error");
     },
   });
 

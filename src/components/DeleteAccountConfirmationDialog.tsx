@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   CircularProgress,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteAccount } from "../api/accountsApi";
+import { SnackbarContext } from "../contexts";
 
 interface DeleteAccountConfirmationDialogProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export const DeleteAccountConfirmationDialog = ({
   accountOwnerId,
 }: DeleteAccountConfirmationDialogProps) => {
   const queryClient = useQueryClient();
+  const { addSnackbar } = useContext(SnackbarContext);
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (accountId: string) => {
@@ -36,6 +38,10 @@ export const DeleteAccountConfirmationDialog = ({
       queryClient.invalidateQueries({
         queryKey: ["accounts", accountOwnerId],
       });
+      addSnackbar(`Konto "${accountDisplayName}" zostało usunięte.`);
+    },
+    onError: () => {
+      addSnackbar("Coś poszło nie tak.", "error");
     },
   });
 

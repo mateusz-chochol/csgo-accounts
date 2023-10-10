@@ -31,7 +31,7 @@ export const AccountCard = ({
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isUnbanDialogOpen, setIsUnbanDialogOpen] = useState(false);
 
-  const remainingBanTime = useRemainingBanTime(banUntil);
+  const remainingBanTime = useRemainingBanTime(banUntil, ownerId);
 
   return (
     <Card variant={remainingBanTime ? "outlined" : "elevation"}>

@@ -15,6 +15,10 @@ export const getRemainingBanTime = (banUntil: string | null) => {
   const banDate = getBanUntilAsDate(banUntil);
   const currentDate = new Date();
 
+  if (banDate <= currentDate) {
+    return null;
+  }
+
   const banDateUTC = Date.UTC(
     banDate.getFullYear(),
     banDate.getMonth(),

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Button,
   CircularProgress,
@@ -19,6 +19,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { daysOptions, defaultTime } from "../consts";
 import { getBanUntilDateString, mapDayOptionToNumberOfDays } from "../utils";
 import { banAccount } from "../api/accountsApi";
+import { SnackbarContext } from "../contexts";
 
 interface BanAccountDialogProps {
   isOpen: boolean;
@@ -37,6 +38,7 @@ export const BanAccountDialog = ({
 }: BanAccountDialogProps) => {
   const [days, setDays] = useState(daysOptions[0]);
   const [time, setTime] = useState<Dayjs | null>(defaultTime);
+  const { addSnackbar } = useContext(SnackbarContext);
 
   const queryClient = useQueryClient();
 
@@ -44,10 +46,16 @@ export const BanAccountDialog = ({
     mutationFn: (newBan: { accountId: string; banUntil: string }) => {
       return banAccount(newBan.accountId, newBan.banUntil);
     },
-    onSuccess: () => {
+    onSuccess: (_, { banUntil }) => {
       queryClient.invalidateQueries({
         queryKey: ["accounts", accountOwnerId],
       });
+      addSnackbar(
+        `Konto "${accountDisplayName}" zostało zbanowane do ${banUntil}.`
+      );
+    },
+    onError: () => {
+      addSnackbar("Coś poszło nie tak.", "error");
     },
   });
 
