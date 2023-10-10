@@ -29,6 +29,10 @@ export const useOwnerAccounts = (ownerId: string) => {
           return account;
         })
         .sort((a, b) => {
+          if (a.banUntil && b.banUntil) {
+            return a.banUntil.localeCompare(b.banUntil);
+          }
+
           if (a.banUntil) {
             return 1;
           }
