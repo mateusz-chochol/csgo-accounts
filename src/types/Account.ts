@@ -6,4 +6,5 @@ export interface Account {
   banCounter: number;
   totalBanTime: number;
   lastBanTime: number;
+  previousLastBanTime: number;
 }

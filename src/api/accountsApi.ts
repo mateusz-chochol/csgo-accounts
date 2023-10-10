@@ -29,6 +29,7 @@ export const fetchUserAccounts = async (userId: string): Promise<Account[]> => {
       banCounter: data.banCounter || 0,
       totalBanTime: data.totalBanTime || 0,
       lastBanTime: data.lastBanTime || 0,
+      previousLastBanTime: data.previousLastBanTime || 0,
     };
   });
 
@@ -55,6 +56,7 @@ export const banAccount = async (
     totalBanTime:
       accountData?.totalBanTime + banTimeTimestamp || banTimeTimestamp,
     lastBanTime: banTimeTimestamp,
+    previousLastBanTime: accountData?.lastBanTime || 0,
   });
 };
 
@@ -69,7 +71,8 @@ export const unbanAccount = async (accountId: string): Promise<void> => {
     banUntil: null,
     banCounter: accountData?.banCounter - 1 || 0,
     totalBanTime: accountData?.totalBanTime - lastBanTime || 0,
-    lastBanTime: 0,
+    lastBanTime: accountData?.previousLastBanTime || 0,
+    previousLastBanTime: 0,
   });
 };
 
