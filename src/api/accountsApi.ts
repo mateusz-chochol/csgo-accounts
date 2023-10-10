@@ -45,10 +45,12 @@ export const banAccount = async (
   const accountData = accountSnapshot.data();
 
   const banUntilDate = getBanUntilAsDate(banUntil);
-  const banUntilTimestamp = banUntilDate.getTime() / MS_PER_SECOND;
-  const currentDateTimestamp = Date.now() / MS_PER_SECOND;
+  const banUntilTimestamp = banUntilDate.getTime();
+  const currentDateTimestamp = Date.now();
 
-  const banTimeTimestamp = Math.ceil(banUntilTimestamp - currentDateTimestamp);
+  const banTimeTimestamp = Math.ceil(
+    (banUntilTimestamp - currentDateTimestamp) / MS_PER_SECOND
+  );
 
   return await updateDoc(accountRef, {
     banUntil,
