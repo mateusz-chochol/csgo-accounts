@@ -6,6 +6,7 @@ import {
 } from "../consts";
 import { getBanUntilAsDate } from "./getBanUntilAsDate";
 import { getTimePartDisplayString } from "./getTimePartDisplayString";
+import { getTimePartSpelling } from "./getTimePartSpelling";
 
 export const getRemainingBanTime = (banUntil: string | null) => {
   if (!banUntil) {
@@ -64,5 +65,8 @@ export const getRemainingBanTime = (banUntil: string | null) => {
     return `${hours}:${minutes}:${seconds}`;
   }
 
-  return `${remainingBanTimeInDays} dni, ${hours}:${minutes}:${seconds}`;
+  return `${remainingBanTimeInDays} ${getTimePartSpelling(
+    remainingBanTimeInDays,
+    "day"
+  )}, ${hours}:${minutes}:${seconds}`;
 };

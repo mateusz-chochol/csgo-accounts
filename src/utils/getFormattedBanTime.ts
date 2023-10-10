@@ -4,6 +4,7 @@ import {
   MS_PER_MINUTE,
   MS_PER_SECOND,
 } from "../consts";
+import { getTimePartSpelling } from "./getTimePartSpelling";
 
 export const getFormattedBanTime = (banTime: number) => {
   const banTimeInMS = banTime * MS_PER_SECOND;
@@ -20,10 +21,10 @@ export const getFormattedBanTime = (banTime: number) => {
   const seconds = Math.floor(remainingTime / MS_PER_SECOND);
 
   const formattedBanTimeStringParts = [
-    days ? `${days} ${days === 1 ? "dzień" : "dni"}` : "",
-    hours ? `${hours} ${hours === 1 ? "godzinę" : "godzin"}` : "",
-    minutes ? `${minutes} ${minutes === 1 ? "minutę" : "minut"}` : "",
-    seconds ? `${seconds} ${seconds === 1 ? "sekundę" : "sekund"}` : "",
+    days ? `${days} ${getTimePartSpelling(days, "day")}` : "",
+    hours ? `${hours} ${getTimePartSpelling(hours, "hour")}` : "",
+    minutes ? `${minutes} ${getTimePartSpelling(minutes, "minute")}` : "",
+    seconds ? `${seconds} ${getTimePartSpelling(seconds, "second")}` : "",
   ];
 
   const formattedBanTimeString = formattedBanTimeStringParts
