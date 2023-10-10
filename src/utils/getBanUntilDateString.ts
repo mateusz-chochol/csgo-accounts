@@ -15,5 +15,5 @@ export const getBanUntilDateString = (
     currentDate.getSeconds() + seconds
   );
 
-  return banUntilDate.toLocaleString();
+  return banUntilDate.toLocaleString("pl-PL");
 };

@@ -12,7 +12,7 @@ export const getRemainingBanTime = (banUntil: string | null) => {
   }
 
   const [date, time] = banUntil.split(",");
-  const [day, month, year] = date.split("/");
+  const [day, month, year] = date.split(".");
 
   const banUntilConvertedToCorrectFormat = `${month}/${day}/${year}, ${time}`;
 
