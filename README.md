@@ -2,6 +2,8 @@
 
 Trochę firebase'a, trochę react-query, na UI śmiga MUI i tak się jakoś żyje
 
-https://csgo-accounts.web.app/
+Link https://csgo-accounts.web.app/
+
+## Preview
 
 ![image](https://github.com/mateusz-chochol/csgo-accounts/assets/44945476/d8e6ca93-df53-4cd5-bccf-a3a3a6e76d9e)
