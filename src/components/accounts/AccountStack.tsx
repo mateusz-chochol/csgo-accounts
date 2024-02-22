@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { AccountCard } from "./AccountCard";
-import { useOwnerAccounts } from "../hooks";
+import { useOwnerAccounts } from "../../hooks";
 import { AddAccountDialog } from "./AddAccountDialog";
 
 interface AccountStackProps {

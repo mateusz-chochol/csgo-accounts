@@ -15,7 +15,7 @@ export const daysOptions = [
   "11 dni",
   "12 dni",
   "13 dni",
-  "14 dni",
+  "Pełny wymiar wakacji",
 ];
 
 export const defaultTime = dayjs("1970-01-01T00:00:00");

@@ -9,8 +9,8 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteAccount } from "../api/accountsApi";
-import { SnackbarContext } from "../contexts";
+import { deleteAccount } from "../../api/accountsApi";
+import { SnackbarContext } from "../../contexts";
 
 interface DeleteAccountConfirmationDialogProps {
   isOpen: boolean;

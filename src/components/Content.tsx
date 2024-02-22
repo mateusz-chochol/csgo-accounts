@@ -12,9 +12,10 @@ import {
   Snackbar,
   useMediaQuery,
 } from "@mui/material";
-import { AccountStack } from "./AccountStack";
 import { useUsers } from "../hooks";
 import { SnackbarContext } from "../contexts";
+import { AccountStack } from "./accounts/AccountStack";
+import { GlobalStatistics } from "./statistics/GlobalStatistics";
 
 export const Content = () => {
   const theme = useTheme();
@@ -94,6 +95,7 @@ export const Content = () => {
   return (
     <Grid container minHeight="100vh" maxWidth="100vw">
       <SnackbarContext.Provider value={{ addSnackbar }}>
+        <GlobalStatistics users={users} />
         {users.map((user, index, usersArray) => (
           <React.Fragment key={user.id}>
             <Grid

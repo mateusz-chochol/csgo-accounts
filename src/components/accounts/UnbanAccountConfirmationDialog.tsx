@@ -9,8 +9,8 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
-import { unbanAccount } from "../api/accountsApi";
-import { SnackbarContext } from "../contexts";
+import { unbanAccount } from "../../api/accountsApi";
+import { SnackbarContext } from "../../contexts";
 
 interface UnbanAccountConfirmationDialogProps {
   isOpen: boolean;

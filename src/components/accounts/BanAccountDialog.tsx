@@ -16,10 +16,10 @@ import {
 import { TimePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import { useMutation, useQueryClient } from "react-query";
-import { daysOptions, defaultTime } from "../consts";
-import { getBanUntilDateString, mapDayOptionToNumberOfDays } from "../utils";
-import { banAccount } from "../api/accountsApi";
-import { SnackbarContext } from "../contexts";
+import { daysOptions, defaultTime } from "../../consts";
+import { getBanUntilDateString, mapDayOptionToNumberOfDays } from "../../utils";
+import { banAccount } from "../../api/accountsApi";
+import { SnackbarContext } from "../../contexts";
 
 interface BanAccountDialogProps {
   isOpen: boolean;

@@ -11,8 +11,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
-import { addNewAccount } from "../api/accountsApi";
-import { SnackbarContext } from "../contexts";
+import { addNewAccount } from "../../api/accountsApi";
+import { SnackbarContext } from "../../contexts";
 
 interface AddAccountDialogProps {
   isOpen: boolean;

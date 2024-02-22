@@ -10,12 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
-import { useRemainingBanTime } from "../hooks";
+import { useRemainingBanTime } from "../../hooks";
 import { BanAccountDialog } from "./BanAccountDialog";
 import { ChangeAccountNameDialog } from "./ChangeAccountNameDialog";
 import { DeleteAccountConfirmationDialog } from "./DeleteAccountConfirmationDialog";
 import { UnbanAccountConfirmationDialog } from "./UnbanAccountConfirmationDialog";
-import { getFormattedBanTime } from "../utils";
+import { getFormattedBanTime } from "../../utils";
 
 interface AccountCardProps {
   id: string;

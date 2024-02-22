@@ -11,8 +11,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
-import { changeAccountName } from "../api/accountsApi";
-import { SnackbarContext } from "../contexts";
+import { changeAccountName } from "../../api/accountsApi";
+import { SnackbarContext } from "../../contexts";
 
 interface ChangeAccountNameDialogProps {
   isOpen: boolean;
