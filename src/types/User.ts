@@ -3,4 +3,5 @@ export interface User {
   displayName: string;
   kicks: number;
   bans: number;
+  gamesPlayed: number;
 }

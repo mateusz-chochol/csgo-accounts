@@ -80,7 +80,12 @@ export const addNewGameStats = async (
 
         return [
           ...promises,
-          updateUsersKicksAndBans(userId, updatedKicks, updatedBans),
+          updateUsersKicksAndBans(
+            userId,
+            updatedKicks,
+            updatedBans,
+            user.gamesPlayed + 1
+          ),
         ];
       }
 
@@ -130,7 +135,12 @@ export const deleteGameStats = async (
 
         return [
           ...promises,
-          updateUsersKicksAndBans(userId, updatedKicks, updatedBans),
+          updateUsersKicksAndBans(
+            userId,
+            updatedKicks,
+            updatedBans,
+            user.gamesPlayed - 1
+          ),
         ];
       }
 

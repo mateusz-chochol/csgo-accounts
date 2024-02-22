@@ -14,6 +14,7 @@ export const fetchUsers = async (): Promise<User[]> => {
       displayName: data.displayName,
       kicks: data.kicks,
       bans: data.bans,
+      gamesPlayed: data.gamesPlayed,
     };
   });
 
@@ -23,10 +24,12 @@ export const fetchUsers = async (): Promise<User[]> => {
 export const updateUsersKicksAndBans = async (
   userId: string,
   kicks: number,
-  bans: number
+  bans: number,
+  gamesPlayed: number
 ): Promise<void> => {
   return await updateDoc(doc(db, "users", userId), {
     kicks,
     bans,
+    gamesPlayed,
   });
 };
