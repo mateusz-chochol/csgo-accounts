@@ -14,6 +14,7 @@ export const fetchTotalGamesStats = async (): Promise<TotalGamesStats> => {
         docId: doc.id,
         kicks: data.kicks,
         bans: data.bans,
+        gamesPlayed: data.gamesPlayed,
       };
     }
   );
@@ -23,11 +24,13 @@ export const fetchTotalGamesStats = async (): Promise<TotalGamesStats> => {
 
 export const updateTotalKicksAndBans = async (
   docId: string,
+  gamesPlayed: number,
   kicks: number,
   bans: number
 ): Promise<void> => {
   return await updateDoc(doc(db, "totalGamesStats", docId), {
     kicks,
     bans,
+    gamesPlayed,
   });
 };

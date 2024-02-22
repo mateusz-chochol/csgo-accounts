@@ -65,6 +65,7 @@ export const addNewGameStats = async (
 
   const updateTotalKicksAndBansPromise = updateTotalKicksAndBans(
     totalGamesStats.docId,
+    totalGamesStats.gamesPlayed + 1,
     totalGamesStats.kicks + kicks,
     totalGamesStats.bans + bans
   );
@@ -114,6 +115,7 @@ export const deleteGameStats = async (
 
   const updateTotalKicksAndBansPromise = updateTotalKicksAndBans(
     totalGamesStats.docId,
+    totalGamesStats.gamesPlayed - 1,
     totalGamesStats.kicks - kicks,
     totalGamesStats.bans - bans
   );
